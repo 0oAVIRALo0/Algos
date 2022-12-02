@@ -7,7 +7,7 @@ for line in f:
     list1 = []
     line = line.split()
 
-    if line[1] == 'Nodes:':
+    if (line[1] == 'Nodes:'):
         nodes = int(line[2])
         edges = int(line[4])
 
@@ -20,30 +20,33 @@ for line in f:
         adjlist[node1-1].append(node2-1)
         adjlist[node2-1].append(node1-1)
 
+print(adjlist)
 # u = starting node
-isvisited = [0] * nodes
+isVisited = [0] * nodes
 path = ""
 
-def hamiltonian(adjlist, u, isvisited, org):
-    if (len(isvisited) == len(adjlist) - 1):
-        flag = 0
-        for i in adjlist[u]:
-            if (i == org):
-                flag = 1
-                break
-        
-        if (flag == 1):
-            print("True")
-        else:
-            print("False")
-
-
-    isvisited[u] = 1
-
-    for i in adjlist[u]:
-        if isvisited[i] == 0:
-            hamiltonian(adjlist, i, isvisited, org)
+def hamiltonianCheck(isVisited):
+    for i in range(0,len(isVisited)):
+        if isVisited[i] ==0:
+            return False
+    return True
+flag=False
+def hamiltonian(adjlist, u, isVisited, org):
+    global flag
+    if isVisited[u] == 0:
+        isVisited[u] = 1
     
-    isvisited[u] = 0
+    for i in adjlist[u]:
+        if i == org:
+            if (hamiltonianCheck(isVisited)):
+                flag=True
+                return
+            else:
+                continue
 
-hamiltonian(adjlist, 0, isvisited, 0)
+        elif isVisited[i] == 0:
+            hamiltonian(adjlist, i, isVisited, org)
+    isVisited[u] = 0
+
+a = hamiltonian(adjlist, 0, isVisited, 0)
+print(flag)
