@@ -1,0 +1,27 @@
+u = starting node
+path = ""
+
+hamiltonian(adjlist, u, isvisited, path, org):
+    if (len(isvisited) == len(adjlist) - 1):
+        flag = 0
+        for i in adjlist[u]:
+            if (i == org):
+                flag = 1
+                break
+        
+        if (flag == 1):
+            print(true)
+        else:
+            print(false)
+
+
+    isvisited[u] = 1
+
+    for i in adjlist[u]:
+        if isvisited[i] == 0:
+            hamiltonian(adjlist, i, isvisited, path + i, org)
+    
+    isvisited[u] = 0
+
+
+Calling hamiltonian function -> hamiltonian(adjlist, 0, isvisited, 0 + "", 0)
