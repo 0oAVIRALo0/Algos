@@ -27,10 +27,11 @@ path = ""
 
 def hamiltonianCheck(isVisited):
     for i in range(0,len(isVisited)):
-        if isVisited[i] ==0:
+        if isVisited[i] == 0:
             return False
     return True
-flag=False
+
+flag = False
 def hamiltonian(adjlist, u, isVisited, org):
     global flag
     if isVisited[u] == 0:
@@ -39,13 +40,14 @@ def hamiltonian(adjlist, u, isVisited, org):
     for i in adjlist[u]:
         if i == org:
             if (hamiltonianCheck(isVisited)):
-                flag=True
+                flag = True
                 return
             else:
                 continue
 
         elif isVisited[i] == 0:
             hamiltonian(adjlist, i, isVisited, org)
+            
     isVisited[u] = 0
 
 a = hamiltonian(adjlist, 0, isVisited, 0)
